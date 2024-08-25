@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  next:
+    build:
+      context: .
+      dockerfile: ./next/Dockerfile
+    container_name: my-bookshelf-next
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./next:/app
+      - ./next/node_modules:/app/node_modules
+
+  database:
+    image: 'postgres:latest'
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    container_name: my-bookshelf-database
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_USER} 
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./database/db-data/:/var/lib/postgresql/data/
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql

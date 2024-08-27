@@ -1,10 +1,13 @@
-import { Input } from '@nextui-org/react';
+import { Input } from "@nextui-org/react";
+import { BiSolidEnvelope } from "react-icons/bi";
+import {getSession} from "./auth";
 
 export default function Page() {
+  const session = getSession();
+
   return (
     <div>
-      <p>Yahello</p>
-      <Input type="email" label="Email" labelPlacement="outside" startContent={<p>a</p>} />
+
     </div>
   );
 }
